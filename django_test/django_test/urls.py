@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework_nested import routers
-from quickstart.views import SchoolViewSet, StudentViewSet
+from main.views import SchoolViewSet, StudentViewSet
 
 router = routers.SimpleRouter()
 router.register(r'schools', SchoolViewSet)

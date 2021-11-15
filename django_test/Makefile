@@ -4,7 +4,7 @@ install:
 	pip install -r ./requirements.txt
 
 migrate:
-	python manage.py makemigrations quickstart
+	python manage.py makemigrations main
 	python manage.py migrate
 
 run:
