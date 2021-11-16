@@ -15,3 +15,6 @@ run-dev:
 
 show-urls:
 	python manage.py show_urls
+
+populate:
+	python populate.py
