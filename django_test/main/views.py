@@ -14,4 +14,5 @@ class StudentViewSet(ModelViewSet):
 class SchoolStudentViewSet(ModelViewSet):
     serializer_class = StudentSerializer
     def get_queryset(self):
+        print(self)
         return Student.objects.filter(school=self.kwargs['school_pk'])
