@@ -21,7 +21,7 @@ class StudentSerializer(serializers.ModelSerializer):
             )
         return gpa
 
-    def _validate_school(self, school, identification_string):
+    def validate_school_limit(self, school, identification_string):
         existing_students = list(school.students.all())
         filtered_existing_students = list(filter(lambda stu: stu.identification_string != identification_string, existing_students))
         if len(filtered_existing_students) >= school.max_student:
@@ -32,7 +32,7 @@ class StudentSerializer(serializers.ModelSerializer):
         school = value.get('school')
         identification_string = value.get('identification_string')
         try:
-            self._validate_school(school, identification_string)
+            self.validate_school_limit(school, identification_string)
         except ValidationError as e:
             raise e
         return value
