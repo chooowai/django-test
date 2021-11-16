@@ -1,12 +1,6 @@
-from os import name
 from django.db import models
-from django.core.exceptions import ValidationError
 import uuid
-
-class School(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=20, null=False)
-    max_student = models.PositiveIntegerField()
+from .school_model import School
 
 class Student(models.Model):
     identification_string = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
