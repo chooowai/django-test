@@ -1,22 +1,16 @@
-from django.http import HttpResponse
 from rest_framework.viewsets import ModelViewSet
-from rest_framework import status
-
+from main.pagination import StandardResultsSetPagination
 from .models import School, Student
 from .serializers import SchoolSerializer, StudentSerializer
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import OrderingFilter
 class SchoolViewSet(ModelViewSet):
     queryset = School.objects.all()
     serializer_class = SchoolSerializer
-
-    def get_queryset(self):
-        queryset = School.objects.all()
-        name = self.request.query_params.get('name')
-        max_student = self.request.query_params.get('max_student')
-        if name is not None:
-            queryset = queryset.filter(name=name)
-        if max_student is not None:
-            queryset = queryset.filter(max_student=max_student)
-        return queryset
+    filter_backends = (DjangoFilterBackend,OrderingFilter,)
+    pagination_class = StandardResultsSetPagination
+    filter_fields = ['name', 'max_student']
+    ordering_fields = ('name', 'max_student')
 
     def update(self, request, pk):
         request.POST._mutable = True
@@ -27,22 +21,10 @@ class SchoolViewSet(ModelViewSet):
 class StudentViewSet(ModelViewSet):
     serializer_class = StudentSerializer
     queryset = Student.objects.all()
-
-    def get_queryset(self):
-        queryset = Student.objects.all()
-        first_name = self.request.query_params.get('first_name')
-        last_name = self.request.query_params.get('last_name')
-        gpa = self.request.query_params.get('gpa')
-        school = self.request.query_params.get('school')
-        if first_name is not None:
-            queryset = queryset.filter(first_name=first_name)
-        if last_name is not None:
-            queryset = queryset.filter(last_name=last_name)
-        if gpa is not None:
-            queryset = queryset.filter(gpa=gpa)
-        if school is not None:
-            queryset = queryset.filter(school=school)
-        return queryset
+    filter_backends = (DjangoFilterBackend,OrderingFilter,)
+    pagination_class = StandardResultsSetPagination
+    filter_fields = ['first_name', 'last_name', 'gpa', 'school']
+    ordering_fields = ('first_name', 'last_name', 'gpa', 'school')
 
     def update(self, request, pk):
         request.POST._mutable = True
@@ -52,18 +34,13 @@ class StudentViewSet(ModelViewSet):
 
 class SchoolStudentViewSet(ModelViewSet):
     serializer_class = StudentSerializer
+    filter_backends = (DjangoFilterBackend,OrderingFilter,)
+    pagination_class = StandardResultsSetPagination
+    filter_fields = ['first_name', 'last_name', 'gpa']
+    ordering_fields = ('first_name', 'last_name', 'gpa')
+
     def get_queryset(self):
-        queryset = Student.objects.filter(school=self.kwargs['school_pk'])
-        first_name = self.request.query_params.get('first_name')
-        last_name = self.request.query_params.get('last_name')
-        gpa = self.request.query_params.get('gpa')
-        if first_name is not None:
-            queryset = queryset.filter(first_name=first_name)
-        if last_name is not None:
-            queryset = queryset.filter(last_name=last_name)
-        if gpa is not None:
-            queryset = queryset.filter(gpa=gpa)
-        return queryset
+        return Student.objects.filter(school=self.kwargs['school_pk'])
 
     def create(self, request, school_pk):
         request.POST._mutable = True
