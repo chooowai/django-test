@@ -14,7 +14,7 @@ class SchoolStudentViewSet(ModelViewSet):
     ordering_fields = ('first_name', 'last_name', 'gpa')
 
     def get_queryset(self):
-        return Student.objects.filter(school=self.kwargs['school_pk'])
+        return Student.objects.filter(school=self.kwargs['school_pk']).order_by('identification_string')
 
     def create(self, request, school_pk):
         request.POST._mutable = True

@@ -7,7 +7,7 @@ from rest_framework.filters import OrderingFilter
 
 class StudentViewSet(ModelViewSet):
     serializer_class = StudentSerializer
-    queryset = Student.objects.all()
+    queryset = Student.objects.all().order_by('identification_string')
     # set up filter, sorting and pagination
     filter_backends = (DjangoFilterBackend,OrderingFilter,)
     pagination_class = StandardResultsSetPagination

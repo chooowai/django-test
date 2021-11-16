@@ -5,7 +5,7 @@ from main.serializers import SchoolSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
 class SchoolViewSet(ModelViewSet):
-    queryset = School.objects.all()
+    queryset = School.objects.all().order_by('id')
     serializer_class = SchoolSerializer
     # set up filter, sorting and pagination
     filter_backends = (DjangoFilterBackend,OrderingFilter,)
