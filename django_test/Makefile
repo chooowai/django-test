@@ -9,3 +9,9 @@ migrate:
 
 run:
 	python manage.py runserver
+
+run-dev:
+	python manage.py runserver --settings django_test.settings.dev
+
+show-urls:
+	python manage.py show_urls
