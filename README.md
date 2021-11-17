@@ -78,7 +78,7 @@ $ make show_urls
 
 ## Diary Log
 
-Initial setup [drf + pip + models + views + serializers + make + databases]: 2 hr
+Initial setup [drf + pip + models + views + serializers + make + databases]: 2hr
 
 Implement Validation: 1hr 30m
 
@@ -92,5 +92,6 @@ add populate file: 10 mins
 
 Heroku deployment and preparation: 1hr
 
+Configuring and writing test cases: 2hr
 
 
