@@ -33,6 +33,8 @@ Bad request are handled in such manners
 
 They all will return BadRequest HTTP Response with proper message
 
+Test cases for all APIs are added in /tests
+
 ## Dependenices for Local
 
 #### Database
@@ -65,6 +67,10 @@ $ make populate
 finally run it :D
 
 $ make run
+
+run tests
+
+$ make test
 
 [Optional] check url list
 

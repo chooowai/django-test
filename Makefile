@@ -10,6 +10,9 @@ migrate:
 run:
 	python manage.py runserver
 
+test:
+	python manage.py test
+
 show-urls:
 	python manage.py show_urls
 
