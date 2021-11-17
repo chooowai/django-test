@@ -28,8 +28,9 @@ For example
 - GET students?/page=2 will return 2nd page paginated by 25 sizes
 
 Bad request are handled in such manners
-- Business logic are validated in serializers, e.g. the school can't accept students more than max limit
-- General validations are handled in model itsef, e.g. school name can't be null
+- Business logic are validated in serializers, e.g. gpa must be between 0 and 4, the school can't accept students more than max limit
+- General validations are handled in model itsef, e.g. school name can't be null and can't accept more than 20 characters
+
 They all will return BadRequest HTTP Response with proper message
 
 ## Dependenices for Local
